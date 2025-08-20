@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教員ダッシュボード - School Life Assistant</title>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="src/css/common.css">
+    <link rel="stylesheet" href="src/css/teacher.css">
+    
+    <!-- JavaScript Files -->
+    <script src="src/js/config.js"></script>
+    <script src="src/data/sampleData.js"></script>
+    <script src="src/js/common.js"></script>
+</head>
+<body class="teacher-theme">
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    School Life Assistant (教員)
+                </div>
+                <nav class="nav">
+                    <a href="#dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        ダッシュボード
+                    </a>
+                    <a href="#students">
+                        <i class="fas fa-users"></i>
+                        生徒管理
+                    </a>
+                    <a href="#analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        分析レポート
+                    </a>
+                    <a href="#communication">
+                        <i class="fas fa-comments"></i>
+                        コミュニケーション
+                    </a>
+                    <a href="#settings">
+                        <i class="fas fa-cog"></i>
+                        設定
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div id="main-content">
+            <!-- ローディング表示 -->
+            <div class="container text-center">
+                <div class="loading" style="margin: 2rem auto;"></div>
+                <p>生徒データを読み込み中...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer style="background: #f8fff8; padding: 1rem 0; text-align: center; color: #666; margin-top: 2rem;">
+        <div class="container">
+            <p>&copy; 2025 School Life Assistant. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                生徒の成長をサポートするためのプラットフォーム
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/js/teacher.js"></script>
+    
+    <!-- 教員専用機能のスクリプト -->
+    <script>
+        // データ更新の自動チェック
+        setInterval(async () => {
+            if (window.teacherApp && CONFIG.DEBUG_MODE) {
+                // 本番環境では実際のデータ更新チェックを実装
+                console.log('データ更新チェック実行');
+            }
+        }, CONFIG.DATA_REFRESH_INTERVAL * 60 * 1000);
+
+        // 緊急通知の受信機能（模擬）
+        function setupNotificationListener() {
+            // 本番環境では実際の通知システムを実装
+            if (Notification.permission === 'granted') {
+                console.log('通知機能有効');
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission().then(permission => {
+                    if (permission === 'granted') {
+                        console.log('通知許可取得');
+                    }
+                });
+            }
+        }
+
+        // ページ表示時の通知設定
+        window.addEventListener('load', setupNotificationListener);
+
+        // データバックアップ機能
+        function autoBackup() {
+            if (window.teacherApp) {
+                const backupData = {
+                    timestamp: new Date().toISOString(),
+                    students: window.teacherApp.students,
+                    version: CONFIG.VERSION
+                };
+                
+                Utils.storage.set('backup_data', backupData);
+                console.log('自動バックアップ完了');
+            }
+        }
+
+        // 1時間ごとの自動バックアップ
+        setInterval(autoBackup, 60 * 60 * 1000);
+
+        // セッション管理
+        let sessionTimer;
+        function resetSessionTimer() {
+            clearTimeout(sessionTimer);
+            sessionTimer = setTimeout(() => {
+                if (confirm('セッションがタイムアウトしました。続行しますか？')) {
+                    resetSessionTimer();
+                } else {
+                    // ログアウト処理
+                    window.location.href = 'index.html';
+                }
+            }, 30 * 60 * 1000); // 30分
+        }
+
+        // ユーザーアクティビティ監視
+        ['mousedown', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetSessionTimer, true);
+        });
+
+        resetSessionTimer();
+    </script>
+
+    <!-- 印刷スタイル -->
+    <style media="print">
+        .header, .nav, footer, .btn, .action-buttons {
+            display: none !important;
+        }
+        
+        .card {
+            box-shadow: none !important;
+            border: 1px solid #ddd !important;
+            page-break-inside: avoid;
+        }
+        
+        .student-card {
+            margin-bottom: 1rem;
+            page-break-inside: avoid;
+        }
+        
+        body {
+            font-size: 12pt;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1, h2, h3 {
+            color: #000 !important;
+        }
+    </style>
+
+    <!-- キーボードショートカット -->
+    <script>
+        document.addEventListener('keydown', (e) => {
+            // Ctrl + F で検索フィールドにフォーカス
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }
+            
+            // Ctrl + E でエクスポート
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                const exportBtn = document.getElementById('export-btn');
+                if (exportBtn) {
+                    exportBtn.click();
+                }
+            }
+            
+            // Escキーでモーダルを閉じる
+            if (e.key === 'Escape') {
+                const modals = document.querySelectorAll('[style*="position: fixed"]');
+                modals.forEach(modal => modal.remove());
+            }
+        });
+    </script>
+
+    <!-- アクセシビリティ向上 -->
+    <script>
+        // スクリーンリーダー対応
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.style.width = '1px';
+            announcement.style.height = '1px';
+            announcement.style.overflow = 'hidden';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+
+        // フォーカス管理
+        let lastFocusedElement;
+        
+        document.addEventListener('focusin', (e) => {
+            lastFocusedElement = e.target;
+        });
+
+        // モーダル開閉時のフォーカス管理
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+
+            firstElement.focus();
+        }
+    </script>
+
+    <!-- メタデータ -->
+    <meta name="description" content="教員向け生徒管理ダッシュボード。生徒の学習状況、特性、目標を一元管理し、効果的な指導をサポート。">
+    <meta name="keywords" content="教員,生徒管理,学習分析,教育支援,ダッシュボード">
+    <meta name="author" content="School Life Assistant">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="教員ダッシュボード - School Life Assistant">
+    <meta property="og:description" content="生徒の学習状況と特性を一元管理する教員専用プラットフォーム">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="教員ダッシュボード - School Life Assistant">
+    <meta name="twitter:description" content="生徒の学習状況と特性を一元管理する教員専用プラットフォーム">
+</body>
+</html>

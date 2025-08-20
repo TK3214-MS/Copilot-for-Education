@@ -1,0 +1,188 @@
+/* 生徒向けスタイル - 青と白ベース */
+.student-theme {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+    min-height: 100vh;
+}
+
+.student-theme .header {
+    background: linear-gradient(135deg, #007acc 0%, #0056b3 100%);
+    color: white;
+}
+
+.student-theme .logo {
+    color: white;
+}
+
+.student-theme .nav a {
+    color: white;
+}
+
+.student-theme .nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* 生徒向けカード */
+.student-theme .card {
+    border-left: 4px solid #007acc;
+}
+
+.student-theme .card-title {
+    color: #0056b3;
+    border-bottom-color: #007acc;
+}
+
+/* 生徒向けボタン */
+.student-theme .btn-primary {
+    background: linear-gradient(135deg, #007acc 0%, #0056b3 100%);
+    color: white;
+}
+
+.student-theme .btn-primary:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+.student-theme .btn-secondary {
+    background: white;
+    color: #007acc;
+    border: 2px solid #007acc;
+}
+
+.student-theme .btn-secondary:hover {
+    background: #007acc;
+    color: white;
+}
+
+/* 学習状況カード */
+.learning-status {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid #b3d9ff;
+}
+
+.strength-item {
+    background: #e6f3ff;
+    color: #0056b3;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin: 0.25rem;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+.weakness-item {
+    background: #fff2e6;
+    color: #cc6600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin: 0.25rem;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* 学習計画セクション */
+.study-plan {
+    background: white;
+    border: 2px solid #007acc;
+    border-radius: 12px;
+}
+
+.study-plan .card-title {
+    background: #007acc;
+    color: white;
+    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+}
+
+/* プログレスバー */
+.progress-bar {
+    background: #e6f3ff;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+.progress-fill {
+    background: linear-gradient(90deg, #007acc 0%, #0056b3 100%);
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* アドバイスセクション */
+.advice-section {
+    background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.advice-icon {
+    color: #007acc;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+/* 学習ログ */
+.log-item {
+    background: white;
+    border-left: 4px solid #007acc;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 4px rgba(0,122,204,0.1);
+}
+
+.log-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.log-topic {
+    font-weight: bold;
+    color: #0056b3;
+    margin-bottom: 0.5rem;
+}
+
+.log-summary {
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 統計表示 */
+.stat-card {
+    background: white;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid #e6f3ff;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007acc;
+    display: block;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .student-theme .header-content {
+        text-align: center;
+    }
+    
+    .strength-item,
+    .weakness-item {
+        display: block;
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+}

@@ -1,0 +1,318 @@
+/* 教員向けスタイル - 緑と白ベース */
+.teacher-theme {
+    background: linear-gradient(135deg, #f0fff0 0%, #e6ffe6 100%);
+    min-height: 100vh;
+}
+
+.teacher-theme .header {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+}
+
+.teacher-theme .logo {
+    color: white;
+}
+
+.teacher-theme .nav a {
+    color: white;
+}
+
+.teacher-theme .nav a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* 教員向けカード */
+.teacher-theme .card {
+    border-left: 4px solid #28a745;
+}
+
+.teacher-theme .card-title {
+    color: #1e7e34;
+    border-bottom-color: #28a745;
+}
+
+/* 教員向けボタン */
+.teacher-theme .btn-primary {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+}
+
+.teacher-theme .btn-primary:hover {
+    background: linear-gradient(135deg, #1e7e34 0%, #155724 100%);
+}
+
+.teacher-theme .btn-secondary {
+    background: white;
+    color: #28a745;
+    border: 2px solid #28a745;
+}
+
+.teacher-theme .btn-secondary:hover {
+    background: #28a745;
+    color: white;
+}
+
+/* 生徒一覧 */
+.student-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.student-card {
+    background: white;
+    border: 1px solid #d4edda;
+    border-left: 4px solid #28a745;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.student-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+    border-left-color: #1e7e34;
+}
+
+.student-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.student-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e7e34;
+}
+
+.student-grade {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+}
+
+/* 生徒詳細情報 */
+.student-profile {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fff8 100%);
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.profile-section {
+    margin-bottom: 1.5rem;
+}
+
+.profile-title {
+    font-weight: bold;
+    color: #1e7e34;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    margin-right: 0.5rem;
+    color: #28a745;
+}
+
+.profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.tag-strength {
+    background: #d4edda;
+    color: #155724;
+}
+
+.tag-weakness {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.tag-subject {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.tag-characteristic {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* コミュニケーション履歴 */
+.communication-log {
+    background: white;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.log-header {
+    background: #28a745;
+    color: white;
+    padding: 1rem;
+    font-weight: bold;
+}
+
+.log-entry {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.log-entry:last-child {
+    border-bottom: none;
+}
+
+.log-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.log-date {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.log-topic {
+    font-weight: bold;
+    color: #1e7e34;
+}
+
+.log-content {
+    color: #495057;
+    line-height: 1.5;
+}
+
+/* 目標・夢セクション */
+.goals-section {
+    background: linear-gradient(135deg, #f8fff8 0%, #ffffff 100%);
+    border: 2px solid #28a745;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.goal-item {
+    background: white;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+}
+
+.goal-label {
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+}
+
+.goal-content {
+    color: #495057;
+}
+
+/* 統計・ダッシュボード */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-widget {
+    background: white;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #28a745;
+    display: block;
+}
+
+.stat-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* フィルタ・検索 */
+.filter-section {
+    background: white;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-row {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* アクションボタン */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    .teacher-theme .header-content {
+        text-align: center;
+    }
+    
+    .student-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+    }
+    
+    .filter-group {
+        min-width: auto;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}

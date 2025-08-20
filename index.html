@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Life Assistant - 学校生活支援アプリケーション</title>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="src/css/common.css">
+    
+    <!-- Custom styles for index page -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .welcome-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 800px;
+            width: 90%;
+            margin: 2rem auto;
+        }
+
+        .welcome-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .welcome-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .welcome-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .welcome-content {
+            padding: 3rem 2rem;
+        }
+
+        .role-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .role-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .role-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .student-card {
+            border-color: #007acc;
+        }
+
+        .student-card:hover {
+            border-color: #0056b3;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+        }
+
+        .teacher-card {
+            border-color: #28a745;
+        }
+
+        .teacher-card:hover {
+            border-color: #1e7e34;
+            background: linear-gradient(135deg, #f0fff0 0%, #e6ffe6 100%);
+        }
+
+        .role-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-card .role-icon {
+            color: #007acc;
+        }
+
+        .teacher-card .role-icon {
+            color: #28a745;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .role-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .role-features li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+
+        .role-features li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .app-features {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer-info {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-header h1 {
+                font-size: 2rem;
+            }
+
+            .role-selection {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-container {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+
+            .welcome-header,
+            .welcome-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* アニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-container {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .role-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .role-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .role-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        /* ダークモード対応 */
+        @media (prefers-color-scheme: dark) {
+            .welcome-container {
+                background: #2d3748;
+                color: #e2e8f0;
+            }
+
+            .role-card {
+                background: #4a5568;
+                border-color: #718096;
+                color: #e2e8f0;
+            }
+
+            .app-features {
+                background: #4a5568;
+            }
+
+            .role-description,
+            .feature-description,
+            .footer-info {
+                color: #a0aec0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <!-- ヘッダー -->
+        <div class="welcome-header">
+            <h1>
+                <i class="fas fa-school"></i>
+                School Life Assistant
+            </h1>
+            <p>学校生活における学習とコミュニケーションを支援するプラットフォーム</p>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <div class="welcome-content">
+            <div class="text-center">
+                <h2 style="color: #333; margin-bottom: 1rem;">利用者を選択してください</h2>
+                <p style="color: #666; margin-bottom: 2rem;">
+                    あなたの役割に応じて最適化されたインターフェースを提供します
+                </p>
+            </div>
+
+            <!-- 役割選択 -->
+            <div class="role-selection">
+                <a href="student.html" class="role-card student-card">
+                    <div class="role-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="role-title">生徒</div>
+                    <div class="role-description">
+                        Microsoft 365 Copilotとの会話ログを基に、あなたの学習をサポートします
+                    </div>
+                    <ul class="role-features">
+                        <li>個人の強み・弱点の分析</li>
+                        <li>学習アドバイスの提供</li>
+                        <li>学習計画の作成支援</li>
+                        <li>進捗状況の可視化</li>
+                    </ul>
+                </a>
+
+                <a href="teacher.html" class="role-card teacher-card">
+                    <div class="role-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="role-title">教員</div>
+                    <div class="role-description">
+                        生徒の学習状況と特性を一元管理し、効果的な指導をサポートします
+                    </div>
+                    <ul class="role-features">
+                        <li>生徒別の詳細情報管理</li>
+                        <li>学習履歴の分析</li>
+                        <li>コミュニケーション記録</li>
+                        <li>指導計画の立案支援</li>
+                    </ul>
+                </a>
+            </div>
+
+            <!-- アプリケーションの特徴 -->
+            <div class="app-features">
+                <h3 style="text-align: center; margin-bottom: 0.5rem; color: #333;">主な機能</h3>
+                <p style="text-align: center; color: #666; margin-bottom: 1.5rem;">
+                    Microsoft 365 Copilotとの連携により、より効果的な学習支援を実現
+                </p>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="feature-title">AI支援分析</div>
+                        <div class="feature-description">
+                            Copilotとの会話を分析して学習パターンを把握
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-title">進捗可視化</div>
+                        <div class="feature-description">
+                            学習の進捗状況をわかりやすく表示
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="feature-title">連携強化</div>
+                        <div class="feature-description">
+                            生徒と教員のコミュニケーションを促進
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-title">安全な環境</div>
+                        <div class="feature-description">
+                            プライバシーを保護した学習環境を提供
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- フッター情報 -->
+            <div class="footer-info">
+                <p><strong>School Life Assistant v1.0.0</strong></p>
+                <p>学習の効率化とコミュニケーションの促進を目指すWebアプリケーション</p>
+                <p style="margin-top: 1rem;">
+                    <i class="fas fa-info-circle"></i>
+                    現在はサンプルデータを使用しています。本番環境では実際のMicrosoft 365 Copilotと連携します。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="src/js/config.js"></script>
+    <script>
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('School Life Assistant 開始');
+            
+            // 最終アクセス記録
+            Utils.storage.set(CONFIG.STORAGE_KEYS.LAST_LOGIN, new Date().toISOString());
+            
+            // アクセシビリティ機能の初期化
+            initializeAccessibility();
+            
+            // 使用統計の記録（プライバシーに配慮）
+            recordAnonymousUsage();
+        });
+
+        // アクセシビリティ機能の初期化
+        function initializeAccessibility() {
+            // キーボードナビゲーション
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    const focusedElement = document.activeElement;
+                    if (focusedElement && focusedElement.classList.contains('role-card')) {
+                        focusedElement.click();
+                    }
+                }
+            });
+
+            // フォーカスの可視化
+            const roleCards = document.querySelectorAll('.role-card');
+            roleCards.forEach(card => {
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                
+                card.addEventListener('focus', () => {
+                    card.style.outline = '3px solid #667eea';
+                    card.style.outlineOffset = '2px';
+                });
+                
+                card.addEventListener('blur', () => {
+                    card.style.outline = 'none';
+                });
+            });
+        }
+
+        // 匿名使用統計の記録
+        function recordAnonymousUsage() {
+            const usage = Utils.storage.get('app_usage', {
+                visits: 0,
+                firstVisit: new Date().toISOString(),
+                lastVisit: null
+            });
+            
+            usage.visits += 1;
+            usage.lastVisit = new Date().toISOString();
+            
+            Utils.storage.set('app_usage', usage);
+        }
+
+        // パフォーマンス測定
+        window.addEventListener('load', () => {
+            if (performance.timing) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`ページ読み込み時間: ${loadTime}ms`);
+            }
+        });
+
+        // エラーハンドリング
+        window.addEventListener('error', (e) => {
+            console.error('エラーが発生しました:', e.error);
+            // 本番環境では適切なエラー報告システムに送信
+        });
+
+        // ダークモード切り替え
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            Utils.storage.set('dark_mode_preference', isDarkMode);
+        }
+
+        // ダークモード設定の復元
+        const darkModePreference = Utils.storage.get('dark_mode_preference', false);
+        if (darkModePreference) {
+            document.body.classList.add('dark-mode');
+        }
+
+        // 言語設定（将来の多言語対応）
+        const language = navigator.language || 'ja';
+        console.log(`検出された言語: ${language}`);
+
+        // PWA関連の機能
+        if ('serviceWorker' in navigator) {
+            // 将来のオフライン対応のための準備
+            console.log('Service Worker対応ブラウザ');
+        }
+
+        // 画面解像度に応じた最適化
+        function optimizeForScreen() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            if (width < 768) {
+                document.body.classList.add('mobile-optimized');
+            } else if (width >= 1200) {
+                document.body.classList.add('desktop-optimized');
+            }
+        }
+
+        window.addEventListener('resize', optimizeForScreen);
+        optimizeForScreen();
+    </script>
+
+    <!-- サービスワーカー登録（将来のPWA対応） -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // 将来的にサービスワーカーファイルを作成予定
+                console.log('PWA対応準備完了');
+            });
+        }
+    </script>
+</body>
+</html>

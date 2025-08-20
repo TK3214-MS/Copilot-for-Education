@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学習ダッシュボード - School Life Assistant</title>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="src/css/common.css">
+    <link rel="stylesheet" href="src/css/student.css">
+    
+    <!-- JavaScript Files -->
+    <script src="src/js/config.js"></script>
+    <script src="src/data/sampleData.js"></script>
+    <script src="src/js/common.js"></script>
+</head>
+<body class="student-theme">
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    School Life Assistant
+                </div>
+                <nav class="nav">
+                    <a href="#dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        ダッシュボード
+                    </a>
+                    <a href="#study-plan">
+                        <i class="fas fa-calendar-alt"></i>
+                        学習計画
+                    </a>
+                    <a href="#progress">
+                        <i class="fas fa-chart-line"></i>
+                        進捗確認
+                    </a>
+                    <a href="#settings">
+                        <i class="fas fa-cog"></i>
+                        設定
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+        <div id="main-content">
+            <!-- ローディング表示 -->
+            <div class="container text-center">
+                <div class="loading" style="margin: 2rem auto;"></div>
+                <p>学習データを読み込み中...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer style="background: #f8fbff; padding: 1rem 0; text-align: center; color: #666; margin-top: 2rem;">
+        <div class="container">
+            <p>&copy; 2025 School Life Assistant. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                学習の進歩を一緒に応援しています！
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="src/js/student.js"></script>
+    
+    <!-- PWA対応のための追加スクリプト -->
+    <script>
+        // サービスワーカーの登録（将来のPWA対応）
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // 将来的にサービスワーカーを実装
+                console.log('PWA対応準備完了');
+            });
+        }
+
+        // 画面サイズに応じたレスポンシブ対応
+        window.addEventListener('resize', () => {
+            // レスポンシブ対応のロジック
+            const width = window.innerWidth;
+            if (width < 768) {
+                document.body.classList.add('mobile-view');
+            } else {
+                document.body.classList.remove('mobile-view');
+            }
+        });
+
+        // 初期表示時のレスポンシブチェック
+        if (window.innerWidth < 768) {
+            document.body.classList.add('mobile-view');
+        }
+    </script>
+
+    <!-- アクセシビリティ向上のためのスクリプト -->
+    <script>
+        // キーボードナビゲーション対応
+        document.addEventListener('keydown', (e) => {
+            // Tabキーでの要素フォーカス時の視覚的フィードバック
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // 高コントラストモード対応
+        const mediaQuery = window.matchMedia('(prefers-contrast: high)');
+        if (mediaQuery.matches) {
+            document.body.classList.add('high-contrast');
+        }
+
+        mediaQuery.addListener((e) => {
+            if (e.matches) {
+                document.body.classList.add('high-contrast');
+            } else {
+                document.body.classList.remove('high-contrast');
+            }
+        });
+    </script>
+
+    <!-- メタデータ（SEO・OGP対応） -->
+    <meta name="description" content="生徒の学習をサポートするダッシュボード。Microsoft 365 Copilotとの会話ログを基に学習アドバイスを提供。">
+    <meta name="keywords" content="学習支援,教育,ダッシュボード,Microsoft Copilot,学習計画">
+    <meta name="author" content="School Life Assistant">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="学習ダッシュボード - School Life Assistant">
+    <meta property="og:description" content="あなたの学習をサポートする個人専用ダッシュボード">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="学習ダッシュボード - School Life Assistant">
+    <meta name="twitter:description" content="あなたの学習をサポートする個人専用ダッシュボード">
+</body>
+</html>
